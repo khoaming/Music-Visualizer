@@ -62,9 +62,6 @@ db.sqlite3
 instance/
 .webassets-cache
 
-# Flask virtual environment
-flask/
-
 # Scrapy stuff:
 .scrapy
 

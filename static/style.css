@@ -1,1 +1,13 @@
 /*all css go here*/
+
+body {
+	padding-top: 50px; /* prevent overlapping navbar, which is 50px high */
+}
+
+.navbar {
+	margin-bottom: 0px; /* override default 20px bottom margin */
+}
+
+.jumbotron {
+	height: 100vh; /* 100% of viewport height, i.e. size of containing div */
+}
