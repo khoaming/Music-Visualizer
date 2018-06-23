@@ -1,0 +1,22 @@
+{
+  "name": "music-visualizer",
+  "version": "1.0.0",
+  "description": "A web application that visualizes music.\r https://muvis-app.herokuapp.com/",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoaming/Music-Visualizer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khoaming/Music-Visualizer/issues"
+  },
+  "homepage": "https://github.com/khoaming/Music-Visualizer#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
