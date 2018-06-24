@@ -21,7 +21,7 @@ var isRainOn = true;
 
 // Set up canvas
 function setup() {
-    createCanvas(windowWidth, windowHeight - 50);
+    createCanvas(windowWidth, windowHeight);
     setFrameRate(60);
     fft = new p5.FFT();
     toggleMic();
@@ -39,35 +39,35 @@ function draw() {
     if(timing < 50) ++vizNum;
     switch(vizNum % 3) {
         case 0: colorMode(RGB);
-                background(0);
-                r = 255;
-                g = 255;
-                b = 255;
-                if (isCirclesOn) drawBlobs();
-                drawForeground();
-                break;
+            background(0);
+            r = 255;
+            g = 255;
+            b = 255;
+            if (isCirclesOn) drawBlobs();
+            drawForeground();
+            break;
         case 1: colorMode(RGB);
-                background(255,20,147);
-                r = 255;
-                g = 255;
-                b = 255;
-                t = 100;
-                //drawRain();
-                drawBirds();
-                drawForeground();
-                break;
+            background(255,20,147);
+            r = 255;
+            g = 255;
+            b = 255;
+            t = 100;
+            //drawRain();
+            drawBirds();
+            drawForeground();
+            break;
         default: background(255);
-                 if (!(speed % 10)) {
-                     rainbow++;
-                     rainbow = rainbow % 360;
-                     speed = 0;
-                 }
-                 speed++;
-                 if (song && isWavesOn) drawBackground();
-                 r = 0;
-                 g = 0;
-                 b = 0;
-                 drawForeground();
+            if (!(speed % 10)) {
+                rainbow++;
+                rainbow = rainbow % 360;
+                speed = 0;
+            }
+            speed++;
+            if (song && isWavesOn) drawBackground();
+            r = 0;
+            g = 0;
+            b = 0;
+            drawForeground();
     }
     if (isRainOn) {
         var weatherType = Math.floor(weather / 100);
@@ -78,10 +78,9 @@ function draw() {
     }
 }
 
-// Resize canvas with window
-window.addEventListener('resize', function(event) {
-    resizeCanvas(windowWidth, windowHeight - 50);
-});
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
 
 function loaded(track) {
     streamUrl = track.stream_url + '?client_id=' + CLIENT_ID;
@@ -278,29 +277,29 @@ function drawBirds() {
 }
 
 function Bird(accel, top) {
-  this.location = createVector(random(width), random(height));
-  this.velocity = createVector(0, 0);
-  this.topspeed = top;
-  this.accel = accel;
+    this.location = createVector(random(width), random(height));
+    this.velocity = createVector(0, 0);
+    this.topspeed = top;
+    this.accel = accel;
 }
 
 Bird.prototype.update = function() {
-  var acceleration = createVector(mouseX - this.location.x, mouseY - this.location.y);
-  acceleration.normalize();
-  acceleration.mult(this.accel);
-  this.velocity.add(acceleration);
-  this.velocity.limit(this.topspeed);
-  this.location.add(this.velocity);
+    var acceleration = createVector(mouseX - this.location.x, mouseY - this.location.y);
+    acceleration.normalize();
+    acceleration.mult(this.accel);
+    this.velocity.add(acceleration);
+    this.velocity.limit(this.topspeed);
+    this.location.add(this.velocity);
 }
 
 Bird.prototype.display = function() {
-  stroke(255);
-  strokeWeight(1);
-  noFill()
-  for(var i = 0; i < 5; ++i) {
-    ellipse(this.location.x, this.location.y, random(30, 50), random(30, 50));
-  }
-  triangle(this.location.x, this.location.y,
-            this.location.x+30, this.location.y-10,
-            this.location.x-40, this.location.y+30)
+    stroke(255);
+    strokeWeight(1);
+    noFill()
+    for(var i = 0; i < 5; ++i) {
+        ellipse(this.location.x, this.location.y, random(30, 50), random(30, 50));
+    }
+    triangle(this.location.x, this.location.y,
+        this.location.x+30, this.location.y-10,
+        this.location.x-40, this.location.y+30)
 }
