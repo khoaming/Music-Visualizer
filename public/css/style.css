@@ -32,7 +32,7 @@ i {
 	justify-content: space-between;
 }
 
-input, textarea {
+textarea {
 	background-color: #111111 !important;
 	color: #BBBBBB !important;
 }
