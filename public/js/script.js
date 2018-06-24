@@ -7,6 +7,7 @@ var speed = 0;
 var rainbow = 0;
 var vizNum = 0;
 var r, g, b, t;
+var isWavesOn = false;
 
 // Set up canvas
 function setup() {
@@ -47,7 +48,7 @@ function draw() {
                      speed = 0;
                  }
                  speed++;
-                 if (song) drawBackground();
+                 if (song && isWavesOn) drawBackground();
                  r = 0;
                  g = 0;
                  b = 0;
@@ -196,4 +197,14 @@ function drawRain() {
     drops[i].fall();
     drops[i].show(r, g, b, t);
   }
+}
+
+function toggleWaves() {
+	var checkBox = document.getElementById("waves");
+ 
+    if (checkBox.checked == true){
+        isWavesOn = true;
+    } else {
+        isWavesOn = false;
+    }
 }
