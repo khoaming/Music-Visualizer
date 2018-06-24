@@ -9,6 +9,7 @@ var streamUrl, song;
 var particles = [];
 var samples = [];
 var drops = [];
+var birds = [];
 var speed = 0;
 var rainbow = 0;
 var vizNum = 0;
@@ -24,6 +25,9 @@ function setup() {
     fft = new p5.FFT();
     for (var i = 0; i < 500; i++) {
         drops[i] = new Drop();
+    }
+    for(var i = 0; i < 20; ++i) {
+        birds[i] = new Bird(random(0.01, 1), random(5, 20));
     }
 }
 
@@ -47,6 +51,7 @@ function draw() {
                 b = 255;
                 t = 100;
                 //drawRain();
+                drawBirds();
                 drawForeground();
                 break;
         default: background(255);
@@ -215,7 +220,7 @@ function drawRain() {
 
 function toggleWaves() {
     var checkBox = document.getElementById("waves");
- 
+
     if (checkBox.checked == true){
         isWavesOn = true;
     } else {
@@ -225,7 +230,7 @@ function toggleWaves() {
 
 function toggleBlobs() {
     var checkBox = document.getElementById("blobs");
- 
+
     if (checkBox.checked == true){
         isCirclesOn = true;
     } else {
@@ -235,10 +240,45 @@ function toggleBlobs() {
 
 function toggleRain() {
     var checkBox = document.getElementById("rain");
- 
+
     if (checkBox.checked == true){
         isRainOn = true;
     } else {
         isRainOn = false;
     }
+}
+
+function drawBirds() {
+    for(var i = 0; i < 20; ++i) {
+        birds[i].update();
+        birds[i].display();
+    }
+}
+
+function Bird(accel, top) {
+  this.location = createVector(random(width), random(height));
+  this.velocity = createVector(0, 0);
+  this.topspeed = top;
+  this.accel = accel;
+}
+
+Bird.prototype.update = function() {
+  var acceleration = createVector(mouseX - this.location.x, mouseY - this.location.y);
+  acceleration.normalize();
+  acceleration.mult(this.accel);
+  this.velocity.add(acceleration);
+  this.velocity.limit(this.topspeed);
+  this.location.add(this.velocity);
+}
+
+Bird.prototype.display = function() {
+  stroke(255);
+  strokeWeight(1);
+  noFill()
+  for(var i = 0; i < 5; ++i) {
+    ellipse(this.location.x, this.location.y, random(30, 50), random(30, 50));
+  }
+  triangle(this.location.x, this.location.y,
+            this.location.x+30, this.location.y-10,
+            this.location.x-40, this.location.y+30)
 }
