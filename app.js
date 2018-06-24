@@ -14,26 +14,48 @@ const DEFAULT_TIME = "day";
 
 // Homepage
 app.get('*', function (req, res) {
-	res.render("index", {weather: DEFAULT_WEATHER, time: DEFAULT_TIME});
+	res.render("index", 
+		{weather: DEFAULT_WEATHER, 
+			time: DEFAULT_TIME});
 })
 
 // Homepage with weather by zip code
 app.post('/', function (req, res) {
-	var url = "http://api.openweathermap.org/data/2.5/weather?zip=" + req.body.zip + ",us&APPID=" + config.getOWMKey();
-	request(url, function(err, response, body) {
+	// Call OpenWeatherMap API to get current weather
+	var weatherParams = "zip=" + req.body.zip 
+						+ ",us&APPID=" + config.getOWMKey();
+	var weatherURL = "http://api.openweathermap.org/data/2.5/weather?" + weatherParams;
+	request(weatherURL, function(err, response, body) {
 		if (err) {
 			console.log(err);
-			res.render("index", {weather: DEFAULT_WEATHER, time: DEFAULT_TIME});
+			res.render("index",
+				{weather: DEFAULT_WEATHER, 
+					time: DEFAULT_TIME});
 		}
 		else {
 			var weatherResponse = JSON.parse(body);
 			if (weatherResponse.main == undefined)
 			{
-				res.render("index", {weather: DEFAULT_WEATHER, time: DEFAULT_TIME});
+				res.render("index",
+					{weather: DEFAULT_WEATHER,
+						time: DEFAULT_TIME});
 			}
 			else
 			{
-				res.render("index", {weather: weatherResponse.weather[0].id, time: DEFAULT_TIME});
+				var time;
+				if (weatherResponse.dt < weatherResponse.sys.sunrise ||
+					weatherResponse.dt > weatherResponse.sys.sunset)
+				{
+					time = "night";
+				}
+				else
+				{
+					time = "day";
+				}
+
+				res.render("index", 
+					{weather: weatherResponse.weather[0].id, 
+						time: time});
 			}
 		}
 	})
