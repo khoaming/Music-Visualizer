@@ -4,6 +4,8 @@ var particles = [];
 var samples = [];
 var speed = 0;
 var rainbow = 0;
+var vizNum = 0;
+var strokeColor = 255;
 
 // Set up canvas
 function setup() {
@@ -14,16 +16,25 @@ function setup() {
 
 // Draw content
 function draw() {
-    background(255);
-    if (!(speed % 10)) {
-        rainbow++;
-        rainbow = rainbow % 360;
-        speed = 0;
+    var timing = millis() % 20000;
+    if(timing < 100) ++vizNum;
+    switch(vizNum % 2) {
+        case 0: background(0);
+                strokeColor = 255;
+                drawBlobs();
+                drawForeground();
+                break;
+        default: background(255);
+                 if (!(speed % 10)) {
+                     rainbow++;
+                     rainbow = rainbow % 360;
+                     speed = 0;
+                 }
+                 speed++;
+                 if (song) drawBackground();
+                 strokeColor = 0;
+                 drawForeground();
     }
-    speed++;
-    if (song) drawBackground();
-    drawBlobs();
-    drawForeground();
 }
 
 // Resize canvas with window
@@ -112,8 +123,8 @@ function drawWave(spectrum, xMap, c, start, end, w) {
 
 function drawForeground() {
     noFill();
-    stroke(0);
     strokeWeight(1);
+    stroke(strokeColor);
     var spectrum = fft.analyze();
 
     var jump = ((2 * PI) / (spectrum.length/16)) / 3;
@@ -123,11 +134,6 @@ function drawForeground() {
         var x = width/2;
         var y = height/2;
         var rad = random(190, 220);
-
-        var r = random(0, 255);
-        var g = random(0, 255);
-        var b = random(0, 255);
-        stroke(r, g, b);
 
         for(var j = 0; j < spectrum.length; j+=16) {
             var m = map(j, 0, spectrum.length, 0, 2 * PI);
@@ -159,7 +165,7 @@ function drawBlobs() {
     strokeWeight(1);
     for (var i = 0; i < particles.length; i++) {
         particles[i].update();
-        particles[i].show();
+        particles[i].show(strokeColor);
     }
     var addPart = millis() % 1000;
     var deletePart = millis() % 10000;

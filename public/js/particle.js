@@ -20,18 +20,14 @@ function Particle(x, y) {
         }
     }
 
-    this.show = function() {
-
+    this.show = function(strokeColor) {
         noFill();
+        stroke(strokeColor);
         ellipse(this.x, this.y, 24, 24);
 
         beginShape();
         for (var i = 0; i < this.history.length; i++) {
             var pos = this.history[i];
-            var r = random(0, 255);
-            var g = random(0, 255);
-            var b = random(0, 255);
-            stroke(r, g, b);
             ellipse(pos.x, pos.y, i, i);
         }
         endShape();
