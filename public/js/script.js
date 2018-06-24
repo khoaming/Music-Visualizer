@@ -14,7 +14,7 @@ function setup() {
 // Draw content
 function draw() {
     background(255);
-	
+
     if (!(speed % 10)) {
       rainbow++;
       rainbow = rainbow % 360;
@@ -23,7 +23,7 @@ function draw() {
     speed++;
     if (song)
       drawBackground();
-	
+
     drawForeground();
 }
 
@@ -65,7 +65,7 @@ function drawBackground() {
   var foregroundRadius = 295;
   samples = fft.waveform();
   var bufLen = samples.length;
-	
+
   colorMode(HSB);
   var c = color(rainbow, 100, 100);
 
@@ -114,6 +114,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
 function drawForeground() {
   noFill();
   stroke(0);
+  strokeWeight(1)
   var spectrum = fft.analyze();
 
   var jump = ((2 * PI) / (spectrum.length/16)) / 3;
