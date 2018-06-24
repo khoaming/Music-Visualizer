@@ -38,7 +38,7 @@ function draw() {
                 g = 255;
                 b = 255;
                 t = 100;
-                drawRain();
+                //drawRain();
                 drawForeground();
                 break;
         default: background(255);
@@ -53,6 +53,13 @@ function draw() {
                  g = 0;
                  b = 0;
                  drawForeground();
+    }
+
+    var weatherCategory = weather / 100;
+    // If thunderstorm, drizzle, or rain: add rain effect
+    if (weatherCategory == 2 || weatherCategory == 3 || weatherCategory == 5)
+    {
+        drawRain();
     }
 }
 
