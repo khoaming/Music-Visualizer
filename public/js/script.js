@@ -1,4 +1,10 @@
 var CLIENT_ID       = "188bdc288184c969c82a24af4145c999";
+
+// OpenWeatherMap codes: https://www.openweathermap.org/weather-conditions
+const THUNDERSTORM = 2;
+const DRIZZLE = 3;
+const RAIN = 5;
+
 var streamUrl, song;
 var particles = [];
 var samples = [];
@@ -55,9 +61,8 @@ function draw() {
                  drawForeground();
     }
 
-    var weatherCategory = weather / 100;
-    // If thunderstorm, drizzle, or rain: add rain effect
-    if (weatherCategory == 2 || weatherCategory == 3 || weatherCategory == 5)
+    var weatherType = Math.floor(weather / 100);
+    if (weatherType == THUNDERSTORM || weatherType == DRIZZLE || weatherType == RAIN)
     {
         drawRain();
     }
