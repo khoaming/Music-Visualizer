@@ -13,7 +13,9 @@ var speed = 0;
 var rainbow = 0;
 var vizNum = 0;
 var r, g, b, t;
-var isWavesOn = false;
+var isWavesOn = true;
+var isCirclesOn = true;
+var isRainOn = true;
 
 // Set up canvas
 function setup() {
@@ -35,7 +37,7 @@ function draw() {
                 r = 255;
                 g = 255;
                 b = 255;
-                drawBlobs();
+                if (isCirclesOn) drawBlobs();
                 drawForeground();
                 break;
         case 1: colorMode(RGB);
@@ -60,11 +62,12 @@ function draw() {
                  b = 0;
                  drawForeground();
     }
-
-    var weatherType = Math.floor(weather / 100);
-    if (weatherType == THUNDERSTORM || weatherType == DRIZZLE || weatherType == RAIN)
-    {
-        drawRain();
+    if (isRainOn) {
+        var weatherType = Math.floor(weather / 100);
+        if (weatherType == THUNDERSTORM || weatherType == DRIZZLE || weatherType == RAIN)
+        {
+            drawRain();
+        }
     }
 }
 
@@ -143,7 +146,6 @@ function drawWave(spectrum, xMap, c, start, end, w) {
     stroke(c, 100, 50);
     beginShape();
     for (var i = start; i < end; i+=4){
-
         var x = map(i, 0, xMap, 0, width);
         var y = map(samples[i], -1, 1, -height/16, height/16);
         vertex(x, y + height/2);
@@ -212,11 +214,31 @@ function drawRain() {
 }
 
 function toggleWaves() {
-	var checkBox = document.getElementById("waves");
+    var checkBox = document.getElementById("waves");
  
     if (checkBox.checked == true){
         isWavesOn = true;
     } else {
         isWavesOn = false;
+    }
+}
+
+function toggleBlobs() {
+    var checkBox = document.getElementById("blobs");
+ 
+    if (checkBox.checked == true){
+        isCirclesOn = true;
+    } else {
+        isCirclesOn = false;
+    }
+}
+
+function toggleRain() {
+    var checkBox = document.getElementById("rain");
+ 
+    if (checkBox.checked == true){
+        isRainOn = true;
+    } else {
+        isRainOn = false;
     }
 }
