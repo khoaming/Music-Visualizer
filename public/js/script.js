@@ -74,6 +74,7 @@ function draw() {
             drawRain();
         }
     }
+    drawRain();
 }
 
 // Resize canvas with window
@@ -212,10 +213,17 @@ function drawBlobs() {
 }
 
 function drawRain() {
+    var spectrum = fft.analyze();
+    var wt = map(spectrum[512] * 10, 0, 255, 1, 6);
     for (var i = 0; i < drops.length; i++) {
-    drops[i].fall();
-    drops[i].show(r, g, b, t);
-  }
+        if (i % 3 == 0) {
+            drops[i].fall(wt);
+            drops[i].show(r, g, b, t, wt);
+        } else {
+            drops[i].fall(1);
+            drops[i].show(r, g, b, t, 1);
+        }
+    }
 }
 
 function toggleWaves() {
