@@ -20,11 +20,11 @@
             <div class="centerflex">
                 <a class="navbar-brand" href="https://muvis-app.herokuapp.com">Muvis</a>
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="wi wi-day-sunny"></i>
+                    <i class="<%= "wi wi-owm-day-" + weather %>"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <form class="form-inline">
-                        <input type="text" class="form-control" id="inputZip" placeholder="Zip">
+                    <form class="form-inline" action="/" method="post">
+                        <input name="zip" type="text" class="form-control" placeholder="Zip code">
                     </form>
                 </div>
             </div>

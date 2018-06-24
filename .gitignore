@@ -27,3 +27,6 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
+
+# API keys
+config.js
