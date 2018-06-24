@@ -1,5 +1,8 @@
 var CLIENT_ID       = "188bdc288184c969c82a24af4145c999";
 var streamUrl, song;
+var samples = [];
+var speed = 0;
+var rainbow = 0;
 
 // Set up canvas
 function setup() {
@@ -11,6 +14,16 @@ function setup() {
 // Draw content
 function draw() {
     background(255);
+	
+    if (!(speed % 10)) {
+      rainbow++;
+      rainbow = rainbow % 360;
+      speed = 0;
+    }
+    speed++;
+    if (song)
+      drawBackground();
+	
     drawForeground();
 }
 
@@ -43,6 +56,59 @@ function loadTrack() {
         if (error.status === 403) alert("Error: " + "The owner of this track doesn't allow 3rd party streaming. Try another track!");
         if (error.status === 404) alert("Error: " + "Invalid URL! Try another SoundCloud URL!");
     });
+}
+
+// Draw background
+function drawBackground() {
+  noFill();
+  var spectrum = fft.analyze();
+  var foregroundRadius = 295;
+  samples = fft.waveform();
+  var bufLen = samples.length;
+	
+  colorMode(HSB);
+  var c = color(rainbow, 100, 100);
+
+  // divide the wave into n number of colors
+  var partition = 20;
+  rainbow -= partition;
+  rainbow = rainbow % 360;
+  var half = parseInt(partition / 2);
+
+  // draw thick waves
+  var div1 = parseInt(bufLen / partition) - parseInt(foregroundRadius / partition);
+  var div2 = parseInt(bufLen / partition) + parseInt(foregroundRadius / partition);
+  for (var i = 0; i < half; i++) {
+    rainbow++;
+    c = color((rainbow%360), 100, 100);
+    drawWave(spectrum, bufLen, c, i * div1, (i + 1) * div1, 4);
+  }
+  for (var i = half; i < partition; i++) {
+    rainbow++;
+    c = color((rainbow%360), 100, 100);
+    drawWave(spectrum, bufLen, c, i * div2, (i + 1) * div2, 4);
+  }
+
+  // thin waves
+  drawWave(spectrum, parseInt(bufLen / 4), c, 0, parseInt(bufLen / 8) - parseInt(foregroundRadius / 8), 2);
+  drawWave(spectrum, parseInt(bufLen / 4), c, parseInt(bufLen / 8) + parseInt(foregroundRadius / 8), bufLen, 2);
+}
+
+// Description: Draws background waves
+// Input: spectrum - frequency spectrum; xMap - width to map spectrum data to; c - color;
+//        start - start position; end - end position; w - line width
+function drawWave(spectrum, xMap, c, start, end, w) {
+  strokeWeight(w);
+  stroke(c, 100, 50);
+  beginShape();
+  for (var i = start; i < end; i++){
+
+      var x = map(i, 0, xMap, 0, width);
+      var y = map(samples[i], -1, 1, -height/16, height/16);
+      vertex(x, y + height/2);
+    }
+  endShape();
+
 }
 
 function drawForeground() {
