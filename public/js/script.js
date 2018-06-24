@@ -1,5 +1,5 @@
 var CLIENT_ID       = "188bdc288184c969c82a24af4145c999";
-var streamUrl, track;
+var streamUrl, song;
 
 // Set up canvas
 function setup() {
@@ -21,15 +21,15 @@ window.addEventListener('resize', function(event) {
 
 function loaded(track) {
     streamUrl = track.stream_url + '?client_id=' + CLIENT_ID;
-    track = loadSound(streamUrl, function() {
-    	track.play();
+    song = loadSound(streamUrl, function() {
+    	song.play();
     	$("#loading-modal").css("display", "none");
     });
 }
 
 function loadTrack() {
-    if (track) {
-        track.stop();
+    if (song) {
+        song.stop();
     }
 
 	// show loading gif
@@ -39,7 +39,9 @@ function loadTrack() {
     var trackUrl = document.getElementById("trackInput").value;
     SC.resolve(trackUrl).then(loaded).catch(function(error) {
         console.log(error);
+        $("#loading-modal").css("display", "none");
         if (error.status === 403) alert("Error: " + "The owner of this track doesn't allow 3rd party streaming. Try another track!");
+        if (error.status === 404) alert("Error: " + "Invalid URL! Try another SoundCloud URL!");
     });
 }
 
