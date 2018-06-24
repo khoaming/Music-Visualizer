@@ -74,7 +74,6 @@ function draw() {
             drawRain();
         }
     }
-    drawRain();
 }
 
 // Resize canvas with window
