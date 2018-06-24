@@ -26,13 +26,8 @@ i {
 	color: white;
 }
 
-#weather {
+.centerflex {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-textarea {
-	background-color: #111111 !important;
-	color: #BBBBBB !important;
 }

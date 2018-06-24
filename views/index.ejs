@@ -17,7 +17,18 @@
     </head>
     <body>
         <nav class="navbar fixed-top navbar-dark bg-dark">
-            <a class="navbar-brand" href="https://muvis-app.herokuapp.com">Muvis</a>
+            <div class="centerflex">
+                <a class="navbar-brand" href="https://muvis-app.herokuapp.com">Muvis</a>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="wi wi-day-sunny"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <form class="form-inline">
+                        <input type="text" class="form-control" id="inputZip" placeholder="Zip">
+                    </form>
+                </div>
+            </div>
+
             <div class="form-inline" id="hud">
                 <input class="form-control input-xxlarge mr-2" id="trackInput" type="text" placeholder="SoundCloud URL...">
                 <button class="btn btn-default" id="goButton" value="undefined" onclick="loadTrack()">Play</button>
