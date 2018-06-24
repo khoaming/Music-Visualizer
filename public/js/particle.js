@@ -20,9 +20,9 @@ function Particle(x, y) {
         }
     }
 
-    this.show = function(strokeColor) {
+    this.show = function(r, g, b) {
         noFill();
-        stroke(strokeColor);
+        stroke(r, g, b);
         ellipse(this.x, this.y, 24, 24);
 
         beginShape();

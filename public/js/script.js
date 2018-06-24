@@ -2,26 +2,42 @@ var CLIENT_ID       = "188bdc288184c969c82a24af4145c999";
 var streamUrl, song;
 var particles = [];
 var samples = [];
+var drops = [];
 var speed = 0;
 var rainbow = 0;
 var vizNum = 0;
-var strokeColor = 255;
+var r, g, b, t;
 
 // Set up canvas
 function setup() {
     createCanvas(windowWidth, windowHeight - 50);
     setFrameRate(60);
     fft = new p5.FFT();
+    for (var i = 0; i < 500; i++) {
+        drops[i] = new Drop();
+    }
 }
 
 // Draw content
 function draw() {
     var timing = millis() % 20000;
-    if(timing < 100) ++vizNum;
-    switch(vizNum % 2) {
-        case 0: background(0);
-                strokeColor = 255;
+    if(timing < 50) ++vizNum;
+    switch(vizNum % 3) {
+        case 0: colorMode(RGB);
+                background(0);
+                r = 255;
+                g = 255;
+                b = 255;
                 drawBlobs();
+                drawForeground();
+                break;
+        case 1: colorMode(RGB);
+                background(255,20,147);
+                r = 255;
+                g = 255;
+                b = 255;
+                t = 100;
+                drawRain();
                 drawForeground();
                 break;
         default: background(255);
@@ -32,7 +48,9 @@ function draw() {
                  }
                  speed++;
                  if (song) drawBackground();
-                 strokeColor = 0;
+                 r = 0;
+                 g = 0;
+                 b = 0;
                  drawForeground();
     }
 }
@@ -124,7 +142,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
 function drawForeground() {
     noFill();
     strokeWeight(1);
-    stroke(strokeColor);
+    stroke(r, g, b);
     var spectrum = fft.analyze();
 
     var jump = ((2 * PI) / (spectrum.length/16)) / 3;
@@ -165,10 +183,17 @@ function drawBlobs() {
     strokeWeight(1);
     for (var i = 0; i < particles.length; i++) {
         particles[i].update();
-        particles[i].show(strokeColor);
+        particles[i].show(r, g, b);
     }
     var addPart = millis() % 1000;
     var deletePart = millis() % 10000;
     if(addPart < 50) newBlob();
     if(deletePart < 100) deleteBlob();
+}
+
+function drawRain() {
+    for (var i = 0; i < drops.length; i++) {
+    drops[i].fall();
+    drops[i].show(r, g, b, t);
+  }
 }
