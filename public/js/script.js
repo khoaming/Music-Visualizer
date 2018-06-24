@@ -5,6 +5,7 @@ const THUNDERSTORM = 2;
 const DRIZZLE = 3;
 const RAIN = 5;
 
+var mic;
 var streamUrl, song;
 var particles = [];
 var samples = [];
@@ -23,6 +24,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight - 50);
     setFrameRate(60);
     fft = new p5.FFT();
+    toggleMic();
     for (var i = 0; i < 500; i++) {
         drops[i] = new Drop();
     }
@@ -252,6 +254,19 @@ function toggleRain() {
         isRainOn = true;
     } else {
         isRainOn = false;
+    }
+}
+
+function toggleMic() {
+    var checkBox = document.getElementById("mic");
+
+    if (checkBox.checked == true){
+        mic = new p5.AudioIn();
+        mic.start();
+        fft.setInput(mic);
+    } else {
+        if (mic)
+            mic.stop();
     }
 }
 

@@ -42,6 +42,8 @@
                 <input class="form-control input-xxlarge mr-2" id="trackInput" type="text" placeholder="SoundCloud URL...">
                 <button class="btn btn-default" id="goButton" value="undefined" onclick="loadTrack()">Play</button>
             </div>
+
+            <div class="toggle-items">Use Mic: <input type="checkbox" id="mic"  onclick="toggleMic()"> </div>
         </nav>
 
         <div id="loading-modal"><span class="loading-text"><img src="img/loading.gif"/></span></div>
@@ -53,7 +55,6 @@
         </script>
         <script src="js/drop.js"></script>
         <script src="js/particle.js"></script>
-
         <script src="js/script.js"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
