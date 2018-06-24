@@ -1,5 +1,6 @@
 var CLIENT_ID       = "188bdc288184c969c82a24af4145c999";
 var streamUrl, song;
+var particles = [];
 var samples = [];
 var speed = 0;
 var rainbow = 0;
@@ -7,23 +8,21 @@ var rainbow = 0;
 // Set up canvas
 function setup() {
     createCanvas(windowWidth, windowHeight - 50);
-    setFrameRate(60);
+    setFrameRate(30);
     fft = new p5.FFT();
 }
 
 // Draw content
 function draw() {
     background(255);
-	
     if (!(speed % 10)) {
       rainbow++;
       rainbow = rainbow % 360;
       speed = 0;
     }
     speed++;
-    if (song)
-      drawBackground();
-	
+    if (song) drawBackground();
+    drawBlobs();
     drawForeground();
 }
 
@@ -65,7 +64,7 @@ function drawBackground() {
   var foregroundRadius = 295;
   samples = fft.waveform();
   var bufLen = samples.length;
-	
+
   colorMode(HSB);
   var c = color(rainbow, 100, 100);
 
@@ -114,6 +113,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
 function drawForeground() {
   noFill();
   stroke(0);
+  strokeWeight(1);
   var spectrum = fft.analyze();
 
   var jump = ((2 * PI) / (spectrum.length/16)) / 3;
@@ -140,4 +140,24 @@ function drawForeground() {
     }
 
   }
+}
+
+function newBlob() {
+  particles.push(new Particle(random(0, width), random(0, height)));
+}
+
+function deleteBlob() {
+  particles = [];
+}
+
+function drawBlobs() {
+  strokeWeight(1);
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].show();
+  }
+  var addPart = millis() % 1000;
+  var deletePart = millis() % 10000;
+  if(addPart < 50) newBlob();
+  if(deletePart < 100) deleteBlob();
 }
