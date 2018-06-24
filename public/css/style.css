@@ -1,3 +1,4 @@
+/* General layout */
 body {
 	padding-top: 50px; /* prevent overlapping navbar, which is 50px high */
 }
@@ -6,10 +7,7 @@ body {
 	margin-bottom: 0px; /* override default 20px bottom margin */
 }
 
-.jumbotron {
-	height: 100vh; /* 100% of viewport height, i.e. size of containing div */
-}
-
+/* Loading */
 #loading-modal {
     display: none;
     top: 50%;
@@ -21,4 +19,20 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* Navigation bar contents */
+i {
+	color: white;
+}
+
+#weather {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+input, textarea {
+	background-color: #111111 !important;
+	color: #BBBBBB !important;
 }
