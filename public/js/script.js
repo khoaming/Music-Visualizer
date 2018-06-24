@@ -8,7 +8,7 @@ var rainbow = 0;
 // Set up canvas
 function setup() {
     createCanvas(windowWidth, windowHeight - 50);
-    setFrameRate(30);
+    setFrameRate(60);
     fft = new p5.FFT();
 }
 
@@ -100,7 +100,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
   strokeWeight(w);
   stroke(c, 100, 50);
   beginShape();
-  for (var i = start; i < end; i++){
+  for (var i = start; i < end; i+=4){
 
       var x = map(i, 0, xMap, 0, width);
       var y = map(samples[i], -1, 1, -height/16, height/16);
