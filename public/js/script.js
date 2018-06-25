@@ -97,7 +97,7 @@ function loadTrack() {
         console.log(error);
         $("#loading-modal").css("display", "none");
         if (error.status === 403) alert("Error: " + "The owner of this track doesn't allow 3rd party streaming. Try another track!");
-        if (error.status === 404) alert("Error: " + "Invalid URL! Try another SoundCloud URL!");
+        if (error.status === 404) alert("Error: " + "Invalid URL! Should be \"https://soundcloud.com/artist/song\"!");
     });
 }
 
