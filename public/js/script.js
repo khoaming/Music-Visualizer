@@ -23,6 +23,7 @@ var drawColor;
 var isWavesOn = true;
 var isCirclesOn = true;
 var isRainOn = true;
+var incViz = true;
 
 // Set up canvas
 function setup() {
@@ -45,7 +46,12 @@ function setup() {
 // Draw content
 function draw() {
     var timing = millis() % 20000;
-    if(timing < 50) ++vizNum;
+    if(timing < 100 && incViz){
+        ++vizNum;
+        incViz = false;
+    } else {
+        incViz = true;
+    }
     switch(vizNum % 3) {
         case 0: colorMode(RGB);
             background(BLACK);
