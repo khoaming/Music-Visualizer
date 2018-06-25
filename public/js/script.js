@@ -7,7 +7,6 @@ const RAIN = 5;
 
 // Color variables, assigned in setup()
 var WHITE;
-var WHITE_100;
 var BLACK;
 var PINK;
 
