@@ -266,6 +266,8 @@ function toggleMic() {
     } else {
         if (mic)
             mic.stop();
+        if (song)
+            fft.setInput(song);
     }
 }
 
