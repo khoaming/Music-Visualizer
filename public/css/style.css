@@ -68,7 +68,20 @@ i {
 
 .sidenav h1 {
     font-size: 25px;
-    color: #818181;
+    color: WHITE;
+	padding-left: 2px;
+}
+
+.sidenav h6 {
+    font-size: 20px;
+    color: WHITE;
+	padding-left: 2px;
+}
+
+.sidenav p {
+    font-size: 16px;
+    color: WHITE;
+	padding-left: 2px;
 }
 
 .sidenav .closebtn {
