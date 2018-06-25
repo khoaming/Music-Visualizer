@@ -28,7 +28,7 @@ var incViz = true;
 // Set up canvas
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    setFrameRate(60);
+    setFrameRate(30);
     fft = new p5.FFT();
     toggleMic();
     for (var i = 0; i < 500; i++) {
