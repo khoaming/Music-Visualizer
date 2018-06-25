@@ -310,3 +310,12 @@ Bird.prototype.display = function() {
         this.location.x+30, this.location.y-10,
         this.location.x-40, this.location.y+30)
 }
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "600px";
+    document.getElementById("mySidenav").style.display = "block";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.display = "none";
+}
