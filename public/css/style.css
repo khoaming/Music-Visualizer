@@ -1,6 +1,7 @@
 /* General layout */
 body {
 	padding-top: 50px; /* prevent overlapping navbar, which is 50px high */
+	overflow: hidden;
 }
 
 .navbar {
