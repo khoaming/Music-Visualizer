@@ -58,7 +58,16 @@ i {
 }
 
 .toggle-items {
-    padding: 8px 20px 8px 8px;
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav p h1 h6 {
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 18px;
     color: #818181;
@@ -69,19 +78,16 @@ i {
 .sidenav h1 {
     font-size: 25px;
     color: WHITE;
-	padding-left: 2px;
 }
 
 .sidenav h6 {
     font-size: 20px;
     color: WHITE;
-	padding-left: 2px;
 }
 
 .sidenav p {
     font-size: 16px;
     color: WHITE;
-	padding-left: 2px;
 }
 
 .sidenav .closebtn {
