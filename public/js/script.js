@@ -155,6 +155,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
     stroke(c, 100, 50);
     beginShape();
     for (var i = start; i < end; i+=4){
+        if (i >= samples.length) continue;
         var x = map(i, 0, xMap, 0, width);
         var y = map(samples[i], -1, 1, -height/16, height/16);
         vertex(x, y + height/2);
