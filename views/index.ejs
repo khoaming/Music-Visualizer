@@ -18,22 +18,25 @@
     <body>
         <nav class="navbar fixed-top navbar-dark bg-dark">
             <div class="centerflex">
-            <div id="mySidenav" class="sidenav bg-dark">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-				<h1>About</h1>
-                <h6>Welcome to Muvis!</h6>
-                <p>This music visualizer works by streaming songs from Soundcloud. To get started…</p>
-
-                <p>1. In the top left, enter your zip code into the weather drop down (if it’s raining you’ll get a surprise!).</p>
-                <p>2. Find a song on Soundcloud and copy the url.</p>
-                <p>3. Paste the url into the text box, push play, and enjoy.</p>
-
-                <p>Check out these recommendations from the developers:</p>
-
-                <p>Jesse:</p>
-                <p>Khoa:</p>
-                <p>Nikolas: https://soundcloud.com/dennis_lloyd/nevermind-1</p>
-                <p>Zach: https://soundcloud.com/diana-pinheiro-3/roslyn-bon-iver-st-vincent</p>
+            <div id="mySidenav" class="sidenav text-white bg-dark">
+                <div class="p-4">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <h1 class="text-primary">About</h1>
+                    <h6>Welcome to Muvis!</h6>
+                    <p>This music visualizer works by streaming songs from Soundcloud. To get started…</p>
+                    <ol>
+                        <li>In the top left, enter your zip code into the weather drop down (if it’s raining you’ll get a surprise!).</li>
+                        <li>Find a song on Soundcloud and copy the url.</li>
+                        <li>Paste the url into the text box, push play, and enjoy.</li>
+                        <li>Check out these recommendations from the developers</li>
+                        <ul>
+                            <li>Jesse: <br><a target="_blank" href="https://soundcloud.com/officialratatat/02-cream-on-chrome-1">https://soundcloud.com/officialratatat/02-cream-on-chrome-1</a></li>
+                            <li>Khoa: <br><a target="_blank" href="https://soundcloud.com/naxsy-official/naxsy-ft-beth-faded-alan-walker-cover">https://soundcloud.com/naxsy-official/naxsy-ft-beth-faded-alan-walker-cover</a></li>
+                            <li>Nikolas: <br><a target="_blank" href="https://soundcloud.com/dennis_lloyd/nevermind-1">https://soundcloud.com/dennis_lloyd/nevermind-1</a></li>
+                            <li>Zach: <br><a target="_blank" href="https://soundcloud.com/diana-pinheiro-3/roslyn-bon-iver-st-vincent">https://soundcloud.com/diana-pinheiro-3/roslyn-bon-iver-st-vincent</a></li>
+                        </ul>
+                    </ol>
+                </div>
 
 				<!--<span class="toggle-items">Waves: <input type="checkbox" id="waves"  onclick="toggleWaves()" checked> </span>
 				<span class="toggle-items">Circles: <input type="checkbox" id="blobs"  onclick="toggleBlobs()" checked> </span>
@@ -56,7 +59,7 @@
                 <button class="btn btn-default" id="goButton" value="undefined" onclick="loadTrack()">Play</button>
             </div>
 
-            <div class="toggle-items">Use Mic: <input type="checkbox" id="mic"  onclick="toggleMic()"> </div>
+            <div class="toggle-items text-white">Use Mic: <input type="checkbox" id="mic"  onclick="toggleMic()"> </div>
 	    <span class="menu-icon" style="font-size:30px;cursor:pointer;" onclick="openNav()">?</span>
         </nav>
 
