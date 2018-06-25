@@ -49,7 +49,7 @@ function draw() {
     if(timing < 100 && incViz){
         ++vizNum;
         incViz = false;
-    } else {
+    } else if(timing > 100) {
         incViz = true;
     }
     switch(vizNum % 3) {
