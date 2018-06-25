@@ -91,6 +91,9 @@ i {
     color: WHITE;
 }
 
+.side-contents {
+	padding: 8px 8px 8px 8px;
+
 .sidenav .closebtn {
     position: absolute;
     top: 0;
