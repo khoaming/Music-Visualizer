@@ -22,10 +22,10 @@ function Drop() {
     }
   }
 
-  this.show = function(r, g, b, t, strong) {
+  this.show = function(color, strong) {
     strokeWeight(strong);
     colorMode(RGB);
-    stroke(r, g, b, t);
+    stroke(color);
     line(this.x, this.y, this.x, this.y+this.len);
   }
 }

@@ -5,6 +5,12 @@ const THUNDERSTORM = 2;
 const DRIZZLE = 3;
 const RAIN = 5;
 
+// Color variables, assigned in setup()
+var WHITE;
+var WHITE_100;
+var BLACK;
+var PINK;
+
 var mic;
 var streamUrl, song;
 var particles = [];
@@ -14,7 +20,7 @@ var birds = [];
 var speed = 0;
 var rainbow = 0;
 var vizNum = 0;
-var r, g, b, t;
+var drawColor;
 var isWavesOn = true;
 var isCirclesOn = true;
 var isRainOn = true;
@@ -31,6 +37,10 @@ function setup() {
     for(var i = 0; i < 20; ++i) {
         birds[i] = new Bird(random(0.01, 1), random(5, 20));
     }
+
+    WHITE = color(255, 255, 255, 255);
+    BLACK = color(0, 0, 0, 255);
+    PINK = color(255, 20, 147, 255);
 }
 
 // Draw content
@@ -39,24 +49,18 @@ function draw() {
     if(timing < 50) ++vizNum;
     switch(vizNum % 3) {
         case 0: colorMode(RGB);
-            background(0);
-            r = 255;
-            g = 255;
-            b = 255;
+            background(BLACK);
+            drawColor = WHITE;
             if (isCirclesOn) drawBlobs();
             drawForeground();
             break;
         case 1: colorMode(RGB);
-            background(255,20,147);
-            r = 255;
-            g = 255;
-            b = 255;
-            t = 100;
-            //drawRain();
+            background(PINK);
+            drawColor = WHITE;
             drawBirds();
             drawForeground();
             break;
-        default: background(255);
+        default: background(WHITE);
             if (!(speed % 10)) {
                 rainbow++;
                 rainbow = rainbow % 360;
@@ -64,9 +68,7 @@ function draw() {
             }
             speed++;
             if (song && isWavesOn) drawBackground();
-            r = 0;
-            g = 0;
-            b = 0;
+            drawColor = BLACK;
             drawForeground();
     }
     if (isRainOn) {
@@ -163,7 +165,7 @@ function drawWave(spectrum, xMap, c, start, end, w) {
 function drawForeground() {
     noFill();
     strokeWeight(1);
-    stroke(r, g, b);
+    stroke(drawColor);
     var spectrum = fft.analyze();
 
     var jump = ((2 * PI) / (spectrum.length/16)) / 3;
@@ -204,7 +206,7 @@ function drawBlobs() {
     strokeWeight(1);
     for (var i = 0; i < particles.length; i++) {
         particles[i].update();
-        particles[i].show(r, g, b);
+        particles[i].show(drawColor);
     }
     var addPart = millis() % 1000;
     var deletePart = millis() % 10000;
@@ -218,10 +220,10 @@ function drawRain() {
     for (var i = 0; i < drops.length; i++) {
         if (i % 3 == 0) {
             drops[i].fall(wt);
-            drops[i].show(r, g, b, t, wt);
+            drops[i].show(drawColor, wt);
         } else {
             drops[i].fall(1);
-            drops[i].show(r, g, b, t, 1);
+            drops[i].show(drawColor, 1);
         }
     }
 }
@@ -295,7 +297,7 @@ Bird.prototype.update = function() {
 }
 
 Bird.prototype.display = function() {
-    stroke(255);
+    stroke(WHITE);
     strokeWeight(1);
     noFill()
     for(var i = 0; i < 5; ++i) {
