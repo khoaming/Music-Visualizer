@@ -84,14 +84,6 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
-function loaded(track) {
-    streamUrl = track.stream_url + '?client_id=' + CLIENT_ID;
-    song = loadSound(streamUrl, function() {
-        song.play();
-        $("#loading-modal").css("display", "none");
-    });
-}
-
 function loadTrack() {
     if (song) {
         song.stop();
@@ -107,6 +99,15 @@ function loadTrack() {
         $("#loading-modal").css("display", "none");
         if (error.status === 403) alert("Error: " + "The owner of this track doesn't allow 3rd party streaming. Try another track!");
         if (error.status === 404) alert("Error: " + "Invalid URL! Try another SoundCloud URL!");
+    });
+}
+
+function loaded(track) {
+    streamUrl = track.stream_url + '?client_id=' + CLIENT_ID;
+    song = loadSound(streamUrl, function() {
+        song.play();
+        fft.setInput(song);
+        $("#loading-modal").css("display", "none");
     });
 }
 
@@ -195,7 +196,8 @@ function drawForeground() {
 }
 
 function newBlob() {
-    particles.push(new Particle(random(0, width), random(0, height)));
+    particles.push(new Particle(random(0, width/4), random(0, height)));
+    particles.push(new Particle(random(3/4 * width, width), random(0, height)));
 }
 
 function deleteBlob() {
