@@ -193,7 +193,8 @@ function drawForeground() {
 }
 
 function newBlob() {
-    particles.push(new Particle(random(0, width), random(0, height)));
+    particles.push(new Particle(random(0, width/4), random(0, height)));
+    particles.push(new Particle(random(3/4 * width, width), random(0, height)));
 }
 
 function deleteBlob() {
